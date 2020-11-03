@@ -1,7 +1,7 @@
 const fs = require('fs');
 const inquire = require('inquirer');
-const generateMarkdown = require('')
-const axios = require('axios');
+const generateMarkdown = require('utils/generateMarkdown.js')
+// const axios = require('axios');
 
 
 // array of questions for user
@@ -88,6 +88,12 @@ const questions = [
 
 // function to write README file
 function writeToFile(fileName, data) {
+  fs.writeToFile(fileName, data, err => {
+    if(err){
+      return console.log(err);
+    }
+    return console.log('Success! Your README.md has been successfully created.')
+  })
 }
 
 // function to initialize program
