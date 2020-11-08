@@ -1,24 +1,11 @@
+// external javascript
 const fs = require('fs');
-const inquire = require('inquirer');
+const inquirer = require('inquirer');
+const util = require('util');
+
+// internal javascript 
 const generateMarkdown = require('utils/generateMarkdown.js')
-const axios = require('axios');
-
-
-const githubAPI = {
-  async getUser(userResponses) {
-    try {
-      // sample url: https://api.github.com/users/emkaygru
-      let response = await axios.get(`https://api.github.com/users/${userResponses.username}`);
-
-      return response.data;
-    } catch (err) {
-      console.log(err);
-    }
-  }
-};
-
-module.exports = githubAPI;
-
+const api = require('utils/githubapi.js');
 
 
 // array of questions for user
@@ -117,19 +104,22 @@ const asyncWriteFile = util.promisify(writeToFile);
 async function init() {
   try {
 
+    // inquirer questions 
     const userResponses = await inquirer.prompt(questions);
     console.log('Your Responses', userResponses);
     console.log('Thank you! Fetching your Github data...');
 
+
+    // github questions 
     const userInfo = await api.getUser(userResponses);
     console.log('Your Github user information:', userInfo);
 
+    // Inquirer user responses and User info saved to markdown
     console.log('Generating your README.md...');
     const markdown = generateMarkdown(userResponses, userInfo);
     console.log(markdown);
 
-    console.log(markdown);
-
+    // write file to markdown 
     await asyncWriteFile('README.md', markdown);
 
   } catch (err) {
