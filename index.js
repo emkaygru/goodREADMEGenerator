@@ -65,7 +65,7 @@ const questions = [
     type: 'input',
     message: 'Enter your project\'s description and contribution guidelines.',
     name: 'description',
-    default: 'Project Decription',
+    default: 'Project Description',
     validate: function (answer) {
       if (answer < 10) {
         return console.log('Your project description must be longer than ten characters.');
