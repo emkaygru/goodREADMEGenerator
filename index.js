@@ -73,7 +73,7 @@ const questions = [
   {
     type: 'input',
     message: 'Please describe your project\'s contribution guidelines.',
-    name: 'guidelines',
+    name: 'contributing',
   },
   {
     type: 'input',
@@ -106,12 +106,12 @@ async function init() {
 
     // inquirer questions 
     const userResponses = await inquirer.prompt(questions);
-    console.log('Your Responses', userResponses);
+    console.log('Your Responses:', userResponses);
     console.log('Thank you! Fetching your Github data...');
 
 
-    // github questions 
-    const userInfo = await api.getUser(userResponses);
+    // github questions via API
+    const userInfo = await githubAPI.getUser(userResponses);
     console.log('Your Github user information:', userInfo);
 
     // Inquirer user responses and User info saved to markdown

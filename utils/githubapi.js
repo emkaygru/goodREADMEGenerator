@@ -3,9 +3,9 @@ const axios = require('axios');
 const githubAPI = {
     async getUser(userResponses) {
         try {
-            // sample url: https://api.github.com/users/emkaygru
+            
             let response = await axios
-
+            // sample url: https://api.github.com/users/emkaygru
                 .get(`https://api.github.com/users/${userResponses.username}`);
 
             return response.data;

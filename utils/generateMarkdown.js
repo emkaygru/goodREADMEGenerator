@@ -1,9 +1,28 @@
 // function to generate markdown for README
 function generateMarkdown(userResponses, userInfo) {
+  let defaultTable = `## Table of Contents`;
+
+  if(userResponses.installation !== '') {
+    defaultTable += `* [Installation](#installation)`
+  };
+
+  if(userResponses.usage !== '') {
+    defaultTable += `* [Usage](#usage)`
+  };
+
+  if(userResponses.contributing !== ''){
+    defaultTable += `* [Contributing](#contributing)`
+  };
+
+  if(userResponses.tests !== ''){
+    defaultTable += `* [Tests](#tests)`
+  };
 
 
   return `
   # Project Title: ${userResponses.title}
+
+  # Repo Name ${userResponses.repo}
 
   ## Project Description: ${userResponses.description}
 
@@ -19,7 +38,7 @@ function generateMarkdown(userResponses, userInfo) {
   
 
   ## Installation
-  ${userResponses.install}
+  ${userResponses.installation}
 
   ## Usage
   ${userResponses.usage}
@@ -30,19 +49,25 @@ function generateMarkdown(userResponses, userInfo) {
   ## Testing
   ${userResponses.tests}
 
-  ## Questions
-  If you have any questions, contact me on Github: [@${userInfo.login}][${userInfo.url}]
 
   ## License Agreement
   ${userResponses.license}
 
 
-## Author
-![Github profile pic](${userInfo.avatar_url})
+
 
 ## Badges
-![badmath](https://img.shields.io/github/repo-size/${userInfo.useame}/${data.repo})
+ ![Badge for GitHub repo top language](https://img.shields.io/github/languages/top/${userResponses.username}/${userResponses.repo}?style=flat&logo=appveyor) ![Badge for GitHub last commit](https://img.shields.io/github/last-commit/${userResponses.username}/${userResponses.repo}?style=flat&logo=appveyor)
+ Check out the badges hosted by [shields.io](https://shields.io/).
 
+
+
+
+ ## Author
+ ![Github profile pic](${userInfo.avatar_url})
+
+ ## Questions
+ If you have any questions, contact me on Github: [@${userInfo.login}][${userInfo.url}]
 `;
 
 
